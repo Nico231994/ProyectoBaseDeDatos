@@ -17,7 +17,8 @@ public class Personas implements IPersonas{
     private String f_nac;
     private String email;
     private String celular;
-
+    private Object[] IMascotas;
+    
     @Override
     public String getCi() {
         return ci;
