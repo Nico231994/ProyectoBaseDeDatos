@@ -51,7 +51,7 @@ public class JFrameVeterinaria extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("RUT veterinaria    CI Veterinario");
+        jLabel2.setText("RUT Veterinaria    CI Veterinario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,7 +59,7 @@ public class JFrameVeterinaria extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextRutVet, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -94,9 +94,17 @@ public class JFrameVeterinaria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-        AgregarDuenioMascota abrir = new AgregarDuenioMascota();
-        abrir.setVisible(true);
-        abrir.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+        String rutVet = jTextRutVet.getText();
+        String ciVet = jTextCIVet.getText();
+        
+        boolean rut_cel = DB_Driver.comprobarVet_Vet(ciVet, rutVet);
+        
+        if(rut_cel == true){
+            AgregarDuenioMascota abrir = new AgregarDuenioMascota();
+            abrir.setVisible(true);
+            abrir.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        }
         
         
     }//GEN-LAST:event_jButtonAgregarActionPerformed

@@ -11,9 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -101,19 +103,29 @@ public class DB_Driver {
                 stmt.setString(2, rut);
                 
                ResultSet rs = stmt.executeQuery();
-               
                 while(rs.next()){
-                    System.out.println(rs.getString("NOMBRE"));
+                    String ciResult = rs.getString("ci");
+                    String rutresult = rs.getString("rut");
+                    if((ciResult.compareTo(ci) == 0) && (rutresult.compareTo(rut) == 0)){
+                        System.out.println(ciResult + rutresult);        
+                        return true;
+                    }
+                    
                 }
+                
+            // if(resultados[0] = ci){
+                 
+                
+           // }
                
                 
             } catch (SQLException ex) {
-                System.out.println("NEROR" + ex);
+                
                 Logger.getLogger(ProyectoBaseDeDatos.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
             }
         
-       return false;
+        return false;
     }
     
 }

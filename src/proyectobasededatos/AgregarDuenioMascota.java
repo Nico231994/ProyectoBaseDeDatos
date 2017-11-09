@@ -145,6 +145,11 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
         jLabel14.setText("Edad*");
 
         JBottonGuardarMascDuen.setText("Guardar");
+        JBottonGuardarMascDuen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBottonGuardarMascDuenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -297,6 +302,26 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
     private void JTextMascotaEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextMascotaEdadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTextMascotaEdadActionPerformed
+
+    private void JBottonGuardarMascDuenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBottonGuardarMascDuenActionPerformed
+        // Se crea el dueno y la mascota. se obtienen los datos del dueno y de la mascota. 
+        //Datos del dueno
+        String nombreDue = JTextDuenioNomb.getText();
+        String apellido = JTextDuenioApell.getText();
+        String ci = JTextDuenioCI.getText();
+        String fecha_nac = JTextDuenioFechaNac.getText();
+        String email = JTextDuenioEmail.getText();
+        String celular = JTextDuenioCelular.getText();
+        //Datos de la Mascota
+        String num_chip = JTextNumeroChip.getText();
+        String nombreMascota = JTextMascotaNombre.getText();
+        double pesoMascota=Double.parseDouble(JTextMascotaPeso.getText());
+        int edadMascota = Integer.parseInt(JTextMascotaEdad.getText());
+        
+        
+        
+        
+    }//GEN-LAST:event_JBottonGuardarMascDuenActionPerformed
 
     /**
      * @param args the command line arguments
