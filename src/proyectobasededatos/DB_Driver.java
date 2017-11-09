@@ -7,10 +7,13 @@ package proyectobasededatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -88,5 +91,29 @@ public class DB_Driver {
     return new DefaultTableModel(data, columnNames);
 
 }
+    //SELECT rut,ci FROM veterinario_veterinaria  WHERE rut='1234';
+    public static boolean comprobarVet_Vet(String ci, String rut){
+        Connection con = DB_Driver.db_connection();
+         PreparedStatement stmt;
+            try {
+                stmt = con.prepareStatement("SELECT * FROM veterinario_veterinaria  where ci =? AND rut=?");
+                stmt.setString(1,ci);
+                stmt.setString(2, rut);
+                
+               ResultSet rs = stmt.executeQuery();
+               
+                while(rs.next()){
+                    System.out.println(rs.getString("NOMBRE"));
+                }
+               
+                
+            } catch (SQLException ex) {
+                System.out.println("NEROR" + ex);
+                Logger.getLogger(ProyectoBaseDeDatos.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+        
+       return false;
+    }
     
 }
