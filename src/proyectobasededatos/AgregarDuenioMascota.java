@@ -16,6 +16,8 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
      */
     public AgregarDuenioMascota() {
         initComponents();
+        this.setResizable(false);
+        
     }
 
     /**

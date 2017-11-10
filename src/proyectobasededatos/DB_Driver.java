@@ -94,6 +94,53 @@ public class DB_Driver {
 
 }
     //SELECT rut,ci FROM veterinario_veterinaria  WHERE rut='1234';
+    
+     public static boolean cargarVet_Vet(String ci, String rut,Veterinario veterinario,Veterinaria veterinaria){
+        Connection con = DB_Driver.db_connection();
+         PreparedStatement stmtVeterinario;
+           PreparedStatement stmtVeterinaria;
+            try {
+                stmtVeterinaria = con.prepareStatement("SELECT * FROM  veterinaria Where rut = ?");
+                stmtVeterinaria.setString(1, veterinaria.getRut());
+                
+                stmtVeterinario = con.prepareStatement("SELECT * FROM veterinario  where ci =?");
+                stmtVeterinario.setString(1,ci);
+                
+               ResultSet rsVeterinaria = stmtVeterinaria.executeQuery();
+               ResultSet rsVeterinario = stmtVeterinario.executeQuery();
+                while(rsVeterinaria.next()){
+                    String nombreVeterinaria = rsVeterinaria.getString("nombre");
+                    veterinaria.setNombre(nombreVeterinaria);    
+                }
+                 while(rsVeterinario.next()){
+                     
+                    String nombreVeterinario = rsVeterinario.getString("nombre");
+                    String apellidoVeterinario = rsVeterinario.getString("apellido");
+                    String fechaNacVeterinario = rsVeterinario.getString("f_nac");
+                    String emailVeterinario = rsVeterinario.getString("email");
+                    String celular = rsVeterinario.getString("celular");
+                    
+                    
+                    veterinario.setNombre(nombreVeterinario);
+                    veterinario.setApellido(apellidoVeterinario);
+                    veterinario.setF_nac(fechaNacVeterinario);
+                    veterinario.setEmail(emailVeterinario);
+                    veterinario.setCelular(celular);
+                }
+                
+                 return comprobarVet_Vet(veterinario.getCi(), veterinaria.getRut());
+                 
+               
+                
+            } catch (SQLException ex) {
+                
+                Logger.getLogger(ProyectoBaseDeDatos.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+                
+            }
+        
+        
+    }
     public static boolean comprobarVet_Vet(String ci, String rut){
         Connection con = DB_Driver.db_connection();
          PreparedStatement stmt;
@@ -127,5 +174,22 @@ public class DB_Driver {
         
         return false;
     }
+    public static ResultSet mostrarDatosVet(String rut) throws SQLException{
+        
+        Connection con = DB_Driver.db_connection();
+         PreparedStatement stmt;
+        
+        
+            stmt = con.prepareStatement("SELECT * FROM tabla_datos_veterinaria  where rut_veterinaria =?");
+            stmt.setString(1,rut);
+            ResultSet rs = stmt.executeQuery();
+            return rs;    
+            
+            
+       
+      
+        
+    }
+    
     
 }

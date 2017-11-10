@@ -17,6 +17,10 @@ public class Veterinario implements IPersonas{
     private String email;
     private String celular;
 
+    public Veterinario(String ci) {
+        this.ci = ci;
+    }
+
     @Override
     public String getCi() {
         return ci;

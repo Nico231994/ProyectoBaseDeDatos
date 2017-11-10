@@ -13,6 +13,10 @@ public class Veterinaria implements IVeterinaria{
     private String rut;
     private String nombre;
 
+    public Veterinaria(String rut) {
+        this.rut = rut;
+    }
+
     public String getRut() {
         return rut;
     }
