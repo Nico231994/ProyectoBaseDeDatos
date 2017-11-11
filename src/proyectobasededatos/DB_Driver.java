@@ -6,11 +6,14 @@
 package proyectobasededatos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -157,14 +160,7 @@ public class DB_Driver {
                         System.out.println(ciResult + rutresult);        
                         return true;
                     }
-                    
                 }
-                
-            // if(resultados[0] = ci){
-                 
-                
-           // }
-               
                 
             } catch (SQLException ex) {
                 
@@ -186,7 +182,7 @@ public class DB_Driver {
             return rs;          
     }  
 
-    public static ResultSet obtenerDatosDuenio(String id_chip,Personas persona, Mascota mascota) throws SQLException{
+    public static void obtenerDatosDuenio(String id_chip,Personas persona, Mascota mascota) throws SQLException{
         
         Connection con = DB_Driver.db_connection();
          PreparedStatement stmt;
@@ -206,6 +202,64 @@ public class DB_Driver {
                     persona.setCi(rs.getString("ci_duenio"));
                 }
             
-            return rs;          
-    }  
+                    
+    }
+    public static boolean marcarDenunciaEncontrada(Mascota mascota) throws SQLException{
+        String id_chip = mascota.getId_chip();
+          Connection con = DB_Driver.db_connection();
+         PreparedStatement stmt;
+         PreparedStatement stmtValidar;
+         stmtValidar = con.prepareStatement("SELECT * FROM DENUNCIA ORDER BY FECHA DESC LIMIT 1 ");
+         stmt = con.prepareStatement("UPDATE DENUNCIA SET ENCONTRADO = TRUE WHERE id_mascota = ? AND  id = (SELECT ID FROM DENUNCIA ORDER BY FECHA DESC LIMIT 1 );");
+         stmt.setString(1, id_chip);
+         ResultSet rsValidar = stmtValidar.executeQuery();
+         
+             while(rsValidar.next()){
+                 System.out.println(rsValidar.getString("encontrado"));
+                 if(rsValidar.getString("encontrado").compareTo("t") == 0){
+                     return false;
+                 }
+                 else{
+                    stmt.execute();
+                 return true;
+                 }
+                
+             
+             }
+        return false;
+    }
+    
+    //INSERT INTO public.denuncia (id, tipo, fecha, direccion, encontrado, ci_persona, ci_veterinario,id_mascota) VALUES (1, 'Test', '0001-01-01 BC', 'Facultad Catolica del Uruguay', 'false', '16496159', '51315000','16496159');
+    public static void insertarDenuncia(Denuncia denuncia) throws SQLException{
+        String ci = denuncia.getCi_Persona();
+        String ciVet= denuncia.getCi_veterinario();
+        
+        //dada una ceula de identidad encontrar las mascotas de esa persona
+        //mascotas_duenios
+        
+        Connection con = DB_Driver.db_connection();
+         PreparedStatement stmt;
+         PreparedStatement stmtInsert;
+        
+            
+            stmt = con.prepareStatement("SELECT * FROM mascotas_duenios  where ci_duenio =?");
+            stmt.setString(1,ci);
+            ResultSet rs = stmt.executeQuery();
+             while(rs.next()){
+                    denuncia.setId_mascota(rs.getString("id_chip"));
+                }
+             
+           Calendar fecha = new GregorianCalendar();
+           int anio = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH);
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+         stmtInsert= con.prepareStatement("INSERT INTO public.denuncia (tipo, fecha, direccion, encontrado, ci_persona, ci_veterinario,id_mascota) "
+                 + "VALUES ('Test', '0001-01-01 BC', 'Facultad Catolica del Uruguay', 'false', '16496159', '51315000','16496159')");
+         
+            stmtInsert.setString(1, "Ingreso por Pantalla");
+            stmtInsert.setDate(4, new java.sql.Date(anio, mes, dia));
+            stmtInsert.setString(2, "");
+            
+        
+    }
 }

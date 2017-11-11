@@ -18,6 +18,12 @@ public class Personas implements IPersonas{
     private String email;
     private String celular;
     private Object[] IMascotas;
+
+    Personas() {}
+
+    Personas(String ci) {
+        this.ci=ci;
+    }
     
     @Override
     public String getCi() {
