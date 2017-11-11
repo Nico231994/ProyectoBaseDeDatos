@@ -9,19 +9,23 @@ package proyectobasededatos;
  *
  * @author NicoPlaceres
  */
-public class mascota implements IMascota{
+public class Mascota implements IMascota{
     private String id_chip;
     private String ci_duenio;
     private String nombre;
     private String peso;
-    private boolean edad;
+    private int edad;
 
-    public mascota(String id_chip, String ci_duenio, String nombre, String peso, boolean edad) {
+    public Mascota(String id_chip, String ci_duenio, String nombre, String peso, int edad) {
         this.id_chip = id_chip;
         this.ci_duenio = ci_duenio;
         this.nombre = nombre;
         this.peso = peso;
         this.edad = edad;
+    }
+
+    Mascota(String id_chip) {
+       this.id_chip=id_chip;
     }
 
     public String getId_chip() {
@@ -59,14 +63,16 @@ public class mascota implements IMascota{
         this.peso = peso;
     }
 
+  
+
     @Override
-    public boolean isEdad() {
-        return edad;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
     @Override
-    public void setEdad(boolean edad) {
-        this.edad = edad;
+    public int getEdad() {
+       return this.edad;
     }
     
     

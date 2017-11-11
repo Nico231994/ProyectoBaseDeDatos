@@ -183,13 +183,29 @@ public class DB_Driver {
             stmt = con.prepareStatement("SELECT * FROM tabla_datos_veterinaria  where rut_veterinaria =?");
             stmt.setString(1,rut);
             ResultSet rs = stmt.executeQuery();
-            return rs;    
-            
-            
-       
-      
+            return rs;          
+    }  
+
+    public static ResultSet obtenerDatosDuenio(String id_chip,Personas persona, Mascota mascota) throws SQLException{
         
-    }
-    
-    
+        Connection con = DB_Driver.db_connection();
+         PreparedStatement stmt;
+        
+            
+            stmt = con.prepareStatement("SELECT * FROM mascotas_duenios  where id_chip =?");
+            stmt.setString(1,id_chip);
+            ResultSet rs = stmt.executeQuery();
+             while(rs.next()){
+                    mascota.setNombre(rs.getString("nombre_mascota"));
+                    mascota.setPeso(rs.getString("peso"));
+                    mascota.setEdad(Integer.parseInt(rs.getString("edad")));
+                    
+                    persona.setNombre(rs.getString("nombre_duenio"));
+                    persona.setCelular(rs.getString("celular"));
+                    persona.setEmail(rs.getString("email"));
+                    persona.setCi(rs.getString("ci_duenio"));
+                }
+            
+            return rs;          
+    }  
 }
