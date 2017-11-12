@@ -8,6 +8,7 @@ package proyectobasededatos;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -91,6 +92,7 @@ public class JFrameAppUsuario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -108,6 +110,9 @@ public class JFrameAppUsuario extends javax.swing.JFrame {
                 this.dispose();
             
             
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Cecula invalida","Cecula invalidas", JOptionPane.ERROR_MESSAGE);
             }
             
             
