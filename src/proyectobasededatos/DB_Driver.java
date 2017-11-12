@@ -195,6 +195,8 @@ public class DB_Driver {
             mascota.setNombre(rs.getString("nombre_mascota"));
             mascota.setPeso(Integer.parseInt(rs.getString("peso")));
             mascota.setEdad(rs.getString("f_mascota"));
+            mascota.setTipo(rs.getString("tipo"));
+            mascota.setRaza(rs.getString("raza"));
 
             persona.setNombre(rs.getString("nombre_duenio"));
             persona.setCelular(rs.getString("celular"));

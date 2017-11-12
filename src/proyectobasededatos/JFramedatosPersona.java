@@ -35,6 +35,8 @@ public class JFramedatosPersona extends javax.swing.JFrame {
         jLabelNomMasc.setText(masco.getNombre());
         jLabelEdadMasc.setText(String.valueOf(masc.getEdad()));
         jLabelPeso.setText(String.valueOf(masc.getPeso()));
+        this.t_masc.setText(masc.getTipo());
+        this.r_masc.setText(masc.getRaza());
         
         this.setResizable(false);
         
@@ -71,6 +73,10 @@ public class JFramedatosPersona extends javax.swing.JFrame {
         jLabelPeso = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jButtonMascotaEncontrada = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        t_masc = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        r_masc = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +122,14 @@ public class JFramedatosPersona extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("Tipo");
+
+        t_masc.setText("Nombre");
+
+        jLabel12.setText("Raza");
+
+        r_masc.setText("Nombre");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,44 +143,43 @@ public class JFramedatosPersona extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabelCelular))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3))
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelEmail)
-                                    .addComponent(jLabelCI))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelPeso, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelEdadMasc, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelNomMasc, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addComponent(jLabelCI)))
+                            .addComponent(jLabel9)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(26, 26, 26)
-                                .addComponent(jLabelCelular)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                                .addComponent(jButtonMascotaEncontrada))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelNomD)
-                                        .addGap(94, 94, 94)
-                                        .addComponent(jLabel5))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(212, 212, 212)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel6))))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel8)
-                                .addGap(125, 125, 125)))
+                                .addComponent(jLabel1)
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabelNomD)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelPeso, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelEdadMasc, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelNomMasc, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(t_masc, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(303, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(r_masc))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jButtonMascotaEncontrada)
+                    .addComponent(jLabel11))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +200,7 @@ public class JFramedatosPersona extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabelNomMasc))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -205,12 +218,18 @@ public class JFramedatosPersona extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabelNomD))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonMascotaEncontrada)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelCelular)
-                        .addComponent(jLabel4)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCelular)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel11)
+                    .addComponent(t_masc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(r_masc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jButtonMascotaEncontrada)
+                .addContainerGap())
         );
 
         pack();
@@ -279,6 +298,8 @@ public class JFramedatosPersona extends javax.swing.JFrame {
     private javax.swing.JButton jButtonMascotaEncontrada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -294,5 +315,7 @@ public class JFramedatosPersona extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNomD;
     private javax.swing.JLabel jLabelNomMasc;
     private javax.swing.JLabel jLabelPeso;
+    private javax.swing.JLabel r_masc;
+    javax.swing.JLabel t_masc;
     // End of variables declaration//GEN-END:variables
 }
