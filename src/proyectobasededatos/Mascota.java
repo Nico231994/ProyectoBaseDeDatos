@@ -15,6 +15,8 @@ public class Mascota implements IMascota{
     private String nombre;
     private int peso;
     private String edad;
+    private String tipo;
+    private String raza;
 
     public Mascota(String id_chip, String ci_duenio, String nombre, int peso, String edad) {
         this.id_chip = id_chip;
@@ -22,6 +24,22 @@ public class Mascota implements IMascota{
         this.nombre = nombre;
         this.peso = peso;
         this.edad = edad;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getRaza() {
+        return raza;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
     }
 
     Mascota(String id_chip) {

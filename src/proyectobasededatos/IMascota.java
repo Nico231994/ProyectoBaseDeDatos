@@ -31,6 +31,14 @@ interface IMascota {
     
     public void setEdad(String edad);
     
+    public String getTipo();
+    
+    public void setTipo(String tipo);
+    
+    public String getRaza();
+    
+    public void setRaza(String raza);
+    
     
     
 }

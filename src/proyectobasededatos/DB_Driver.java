@@ -14,6 +14,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
@@ -54,8 +55,8 @@ public class DB_Driver {
         try {
 
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://192.168.56.101:5432/ProyectoBD", "postgres",
-                    "123");
+                    "jdbc:postgresql://127.0.0.1:3000/BaseDatos_Mascota", "postgres",
+                    "hola1234");
 
         } catch (SQLException e) {
 
@@ -354,8 +355,8 @@ public class DB_Driver {
             stmt.setString(2, pers.getCi());
             stmt.setString(3, masc.getNombre());
             stmt.setInt(4, masc.getPeso());
-            stmt.setString(5, "PERRO");
-            stmt.setString(6, "CANICHE");
+            stmt.setString(5, masc.getTipo());
+            stmt.setString(6, masc.getRaza());
             stmt.setDate(7, new java.sql.Date(aDate.getTime()));
             stmt.execute();
             
@@ -406,8 +407,8 @@ public class DB_Driver {
         stmt.setString(2, pers.getCi());
         stmt.setString(3, masc.getNombre());
         stmt.setInt(4, masc.getPeso());
-        stmt.setString(5, "PERRO");
-        stmt.setString(6, "CANICHE");
+        stmt.setString(5, masc.getTipo());
+        stmt.setString(6, masc.getRaza());
         stmt.setDate(7, new java.sql.Date(aDate.getTime()));
         stmt.execute();
         
@@ -434,7 +435,7 @@ public class DB_Driver {
     }
 
     static boolean validarCi(Personas persona) throws SQLException {
-         Connection con = DB_Driver.db_connection();
+        Connection con = DB_Driver.db_connection();
         PreparedStatement stmt;
         
         stmt = con.prepareStatement("SELECT * FROM PERSONAS WHERE ci= ?;");
@@ -457,4 +458,38 @@ public class DB_Driver {
         }
         return false;
     }
+    
+    public static ArrayList<String> obtenerTiposMascotas() throws SQLException {
+        Connection con = DB_Driver.db_connection();
+        PreparedStatement stmt;
+        stmt = con.prepareStatement("SELECT * FROM tipo_mascota;");
+        stmt.executeQuery();
+        ResultSet rs = stmt.executeQuery();
+        ArrayList<String> result = new ArrayList<String>();
+        
+        while (rs.next()) {
+            String tipo = rs.getString("tipo");
+            result.add(tipo);
+        }
+        con.close();
+        return result;
+    }
+    
+     public static ArrayList<String> obtenerRazasDeTipo(String tipo_masc) throws SQLException {
+        Connection con = DB_Driver.db_connection();
+        PreparedStatement stmt;
+        stmt = con.prepareStatement("SELECT * FROM raza WHERE tipo_mascota=?;");
+        stmt.setString(1, tipo_masc);
+        stmt.executeQuery();
+        ResultSet rs = stmt.executeQuery();
+        ArrayList<String> result = new ArrayList<String>();
+        
+        while (rs.next()) {
+            String tipo = rs.getString("raza");
+            result.add(tipo);
+        }
+        con.close();
+        return result;
+    }
+        
 }
