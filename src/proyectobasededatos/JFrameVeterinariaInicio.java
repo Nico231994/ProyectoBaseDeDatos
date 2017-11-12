@@ -100,6 +100,7 @@ public class JFrameVeterinariaInicio extends javax.swing.JFrame {
         jTextFieldDirDenunciante = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jTextFieldFiltro = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -213,7 +214,9 @@ public class JFrameVeterinariaInicio extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton5)
-                                .addGap(308, 308, 308)))))
+                                .addGap(27, 27, 27)
+                                .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(161, 161, 161)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -234,7 +237,9 @@ public class JFrameVeterinariaInicio extends javax.swing.JFrame {
                                 .addComponent(jLabel4)))
                         .addGap(1, 1, 1)
                         .addComponent(jLabel2))
-                    .addComponent(jButton5))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton5)
+                        .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -356,10 +361,18 @@ public class JFrameVeterinariaInicio extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
             // TODO add your handling code here:
+            String chip =jTextFieldFiltro.getText();
             
+            if(chip.compareTo("")==0){
             ResultSet rs =DB_Driver.mostrarDatosVet(veta.getRut());
             DefaultTableModel buildTableModel = buildTableModel(rs);
             jTable1.setModel(buildTableModel);
+            }
+            else{
+            ResultSet rsf =DB_Driver.filtrarDatos(chip, veta.getRut());
+            DefaultTableModel buildTableModel = buildTableModel(rsf);
+            jTable1.setModel(buildTableModel);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(JFrameVeterinariaInicio.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -417,5 +430,6 @@ public class JFrameVeterinariaInicio extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldCiDenunciante;
     private javax.swing.JTextField jTextFieldDirDenunciante;
+    private javax.swing.JTextField jTextFieldFiltro;
     // End of variables declaration//GEN-END:variables
 }

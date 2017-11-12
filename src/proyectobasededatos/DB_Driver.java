@@ -54,9 +54,12 @@ public class DB_Driver {
 
         try {
 
-            connection = DriverManager.getConnection(
+           /* connection = DriverManager.getConnection(
                     "jdbc:postgresql://127.0.0.1:3000/BaseDatos_Mascota", "postgres",
-                    "hola1234");
+                    "hola1234");*/
+           connection = DriverManager.getConnection(
+					"jdbc:postgresql://192.168.56.101:5432/ProyectoBD", "postgres",
+					"123");
 
         } catch (SQLException e) {
 
@@ -179,6 +182,17 @@ public class DB_Driver {
 
         stmt = con.prepareStatement("SELECT * FROM tabla_datos_veterinaria  where rut_veterinaria =?");
         stmt.setString(1, rut);
+        ResultSet rs = stmt.executeQuery();
+        return rs;
+    }
+     public static ResultSet filtrarDatos(String id_chip, String rut) throws SQLException {
+
+        Connection con = DB_Driver.db_connection();
+        PreparedStatement stmt;
+
+        stmt = con.prepareStatement("SELECT * FROM tabla_datos_veterinaria  where chip_mascota =? AND rut_veterinaria =?");
+        stmt.setString(1, id_chip);
+         stmt.setString(2, rut);
         ResultSet rs = stmt.executeQuery();
         return rs;
     }
