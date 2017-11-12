@@ -10,14 +10,24 @@ package proyectobasededatos;
  * @author NicoPlaceres
  */
 public class AgregarDuenioMascota extends javax.swing.JFrame {
+    
+    Personas pers;
+    
 
     /**
      * Creates new form AgregarDuenioMascota
      */
-    public AgregarDuenioMascota() {
+    public AgregarDuenioMascota( Personas persona) {
+        this.pers = persona;
         initComponents();
         this.setResizable(false);
         
+    }
+
+    private AgregarDuenioMascota() {
+        
+        initComponents();
+//To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -314,6 +324,7 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
         String fecha_nac = JTextDuenioFechaNac.getText();
         String email = JTextDuenioEmail.getText();
         String celular = JTextDuenioCelular.getText();
+        
         //Datos de la Mascota
         String num_chip = JTextNumeroChip.getText();
         String nombreMascota = JTextMascotaNombre.getText();

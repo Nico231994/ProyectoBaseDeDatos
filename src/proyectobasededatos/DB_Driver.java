@@ -315,4 +315,16 @@ public class DB_Driver {
              System.out.println(e.getMessage());
         }
     }
+
+    static void emptyDuenio(Personas pers) throws SQLException {
+        
+         Connection con = DB_Driver.db_connection();
+         PreparedStatement stmt;
+             stmt = con.prepareStatement("SELECT * FROM PERSONAS WHERE ci= ?;");
+             stmt.setString(1,pers.getCi());
+             stmt.executeQuery();
+             ResultSet rs = stmt.executeQuery();
+             
+         
+    }
 }

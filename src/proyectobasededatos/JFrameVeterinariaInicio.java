@@ -245,7 +245,9 @@ public class JFrameVeterinariaInicio extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        AgregarDuenioMascota abrir = new AgregarDuenioMascota();
+        
+        
+        AgregarDuenioMascota abrir = new AgregarDuenioMascota(persona);
             abrir.setVisible(true);
             abrir.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton1ActionPerformed
