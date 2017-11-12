@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -227,8 +228,6 @@ public class agregarVeterinario extends javax.swing.JFrame {
     }//GEN-LAST:event_celularTFActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //agregar datos del veterinario
         String nombreVet = nombreTF.getText();
         String apellidoVet = apellidoTF.getText();
         String ci = ciTF.getText();
@@ -240,23 +239,30 @@ public class agregarVeterinario extends javax.swing.JFrame {
         System.out.println(nombreVet + " " + apellidoVet + " " + ci + " " + celular + " " + email + " " + fechaNacimiento);
         
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
+      
         /*try {
             Date date = (Date) format.parse("12/31/2006");
         } catch (ParseException ex) {
             Logger.getLogger(agregarVeterinario.class.getName()).log(Level.SEVERE, null, ex);
         }*/
         
+        
         try {
             
-           
+            
             java.util.Date aDate = format.parse(fechaNacimiento);
-            DB_Driver.agregarDatosVet(ci, nombreVet, apellidoVet, aDate.getTime(), email, celular ,rut);
+            
+            boolean agregar = DB_Driver.agregarDatosVet(ci, nombreVet, apellidoVet, aDate.getTime(), email, celular ,rut);
+            if(!agregar){
+                DB_Driver.agregarDatosVet(ci, nombreVet, apellidoVet, aDate.getTime(), email, celular ,rut);
+            }else{
+                 JOptionPane.showMessageDialog(null,"Rut invalido","Rut invalido", JOptionPane.ERROR_MESSAGE);
+            }
              System.out.println(nombreVet + " " + apellidoVet + " " + ci + " " + celular + " " + email + " " + fechaNacimiento);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             //Logger.getLogger(agregarVeterinario.class.getName()).log(Level.SEVERE, null, e);
         }
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rutVetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rutVetActionPerformed

@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import static proyectobasededatos.DB_Driver.buildTableModel;
 
 /**
@@ -25,53 +26,28 @@ public class PersonasJFrame extends javax.swing.JFrame {
     /**
      * Creates new form PersonasJFrame
      */
-    public PersonasJFrame() {
+    public PersonasJFrame( Personas persona) {
+        
+        initComponents();
+        jLabel2.setText(persona.getNombre() +" "+ persona.getApellido());
         Connection con = DB_Driver.db_connection();
          PreparedStatement stmt;
          ResultSet rs;
             try {
-                stmt = con.prepareStatement("SELECT * FROM personas");
-                stmt = con.prepareStatement("SELECT * FROM personas where ci =?");
-                stmt.setString(1,"12781626");
+                
+                stmt = con.prepareStatement("SELECT * FROM mascotas_de_un_duenio WHERE ci_duenio =?");
+                stmt.setString(1,persona.getCi());
                 rs = stmt.executeQuery();
-               JTable table = new JTable(buildTableModel(rs));
-                
-                while(rs.next()){
-                    System.out.println(rs.getString("NOMBRE"));
-                    
-                }
-              
-               
-                add( new JScrollPane(table));
-                pack();
-                
-              
+                DefaultTableModel buildTableModel = buildTableModel(rs);
+                jTable1.setModel(buildTableModel);
                 
             } catch (SQLException ex) {
                 Logger.getLogger(ProyectoBaseDeDatos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
-      
-    // The Connection is obtained
+    }
 
-//    ResultSet rs = stmt.executeQuery("select * from product_info");
-
-    // It creates and displays the table
-    
-    
-    
-
-    // Closes the Connection
-
-    
-
-    
-        initComponents();
-       
-        
-    
-    
+    private PersonasJFrame() {
+         initComponents();  
     }
 
     /**
@@ -83,17 +59,59 @@ public class PersonasJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setText("BIENVENIDO:");
+
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel2)))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,5 +153,9 @@ public class PersonasJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

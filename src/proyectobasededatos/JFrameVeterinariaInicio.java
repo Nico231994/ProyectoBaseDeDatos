@@ -70,10 +70,6 @@ public class JFrameVeterinariaInicio extends javax.swing.JFrame {
         ResultSet rs =DB_Driver.mostrarDatosVet(veta.getRut());
         DefaultTableModel buildTableModel = buildTableModel(rs);
         
-        buildTableModel.getRowCount();
-        buildTableModel.getColumnCount();
-        System.out.println(buildTableModel.getRowCount());
-        System.out.println(buildTableModel.getColumnCount());
         jTable1.setModel(buildTableModel);
         
     }
@@ -247,7 +243,7 @@ public class JFrameVeterinariaInicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-        AgregarDuenioMascota abrir = new AgregarDuenioMascota(persona);
+        AgregarDuenioMascota abrir = new AgregarDuenioMascota(persona, veto,veta);
             abrir.setVisible(true);
             abrir.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton1ActionPerformed

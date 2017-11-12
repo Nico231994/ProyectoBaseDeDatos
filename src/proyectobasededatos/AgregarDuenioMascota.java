@@ -5,20 +5,31 @@
  */
 package proyectobasededatos;
 
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author NicoPlaceres
  */
 public class AgregarDuenioMascota extends javax.swing.JFrame {
     
-    Personas pers;
+    private Personas pers = null;
+    private Mascota masc = null;
+    private Veterinario veto = null;
+    private Veterinaria veta= null;
+    
     
 
     /**
      * Creates new form AgregarDuenioMascota
      */
-    public AgregarDuenioMascota( Personas persona) {
+    public AgregarDuenioMascota( Personas persona , Veterinario veto , Veterinaria veta) {
         this.pers = persona;
+        this.veta = veta;
+        this.veto=veto;
         initComponents();
         this.setResizable(false);
         
@@ -27,7 +38,7 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
     private AgregarDuenioMascota() {
         
         initComponents();
-//To change body of generated methods, choose Tools | Templates.
+
     }
 
     /**
@@ -41,19 +52,9 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
-        JTextDuenioNomb = new javax.swing.JTextField();
-        JTextDuenioApell = new javax.swing.JTextField();
         JTextDuenioCI = new javax.swing.JTextField();
-        JTextDuenioEmail = new javax.swing.JTextField();
-        JTextDuenioCelular = new javax.swing.JTextField();
-        JTextDuenioFechaNac = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         JTextMascotaNombre = new javax.swing.JTextField();
         JTextMascotaPeso = new javax.swing.JTextField();
         JTextNumeroChip = new javax.swing.JTextField();
@@ -70,19 +71,7 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Telugu Sangam MN", 1, 24)); // NOI18N
-        jLabel1.setText("Agregar Dueño y Mascota ");
-
-        JTextDuenioNomb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextDuenioNombActionPerformed(evt);
-            }
-        });
-
-        JTextDuenioApell.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextDuenioApellActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Agregar Dueño y/o Mascota ");
 
         JTextDuenioCI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,37 +79,9 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
             }
         });
 
-        JTextDuenioEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextDuenioEmailActionPerformed(evt);
-            }
-        });
-
-        JTextDuenioCelular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextDuenioCelularActionPerformed(evt);
-            }
-        });
-
-        JTextDuenioFechaNac.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextDuenioFechaNacActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("DATOS DEL DUEÑO:");
 
-        jLabel3.setText("Nombre*");
-
-        jLabel4.setText("CI*");
-
-        jLabel5.setText("Apellido*");
-
-        jLabel6.setText("Fecha Nacimiento dd/mm/yyyy");
-
-        jLabel7.setText("Email*");
-
-        jLabel8.setText("Celular*");
+        jLabel4.setText("CI Persona *");
 
         JTextMascotaNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,23 +132,9 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(JTextDuenioApell, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JTextDuenioNomb, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JTextDuenioCI, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JTextDuenioCelular)
-                            .addComponent(JTextDuenioEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(JTextDuenioFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)))
+                        .addComponent(JTextDuenioCI, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -209,11 +156,12 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(9, 9, 9)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
+                                            .addComponent(JTextMascotaEdad)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
                                                 .addComponent(JBottonGuardarMascDuen)
-                                                .addGap(0, 17, Short.MAX_VALUE))
-                                            .addComponent(JTextMascotaEdad)))))))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(89, 89, 89))))))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -226,6 +174,11 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(JTextDuenioCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -244,60 +197,18 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JTextMascotaEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JTextDuenioCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JTextDuenioNomb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JTextDuenioApell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(JTextDuenioFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JTextDuenioEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JTextDuenioCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
-                            .addComponent(JBottonGuardarMascDuen))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JBottonGuardarMascDuen)
+                        .addGap(20, 20, 20))))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void JTextDuenioNombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextDuenioNombActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTextDuenioNombActionPerformed
-
-    private void JTextDuenioApellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextDuenioApellActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTextDuenioApellActionPerformed
 
     private void JTextDuenioCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextDuenioCIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTextDuenioCIActionPerformed
-
-    private void JTextDuenioEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextDuenioEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTextDuenioEmailActionPerformed
-
-    private void JTextDuenioCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextDuenioCelularActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTextDuenioCelularActionPerformed
-
-    private void JTextDuenioFechaNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextDuenioFechaNacActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTextDuenioFechaNacActionPerformed
 
     private void JTextMascotaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextMascotaNombreActionPerformed
         // TODO add your handling code here:
@@ -318,20 +229,38 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
     private void JBottonGuardarMascDuenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBottonGuardarMascDuenActionPerformed
         // Se crea el dueno y la mascota. se obtienen los datos del dueno y de la mascota. 
         //Datos del dueno
-        String nombreDue = JTextDuenioNomb.getText();
-        String apellido = JTextDuenioApell.getText();
         String ci = JTextDuenioCI.getText();
-        String fecha_nac = JTextDuenioFechaNac.getText();
-        String email = JTextDuenioEmail.getText();
-        String celular = JTextDuenioCelular.getText();
+        pers = new Personas(ci);
+       
+      
         
         //Datos de la Mascota
         String num_chip = JTextNumeroChip.getText();
         String nombreMascota = JTextMascotaNombre.getText();
-        double pesoMascota=Double.parseDouble(JTextMascotaPeso.getText());
-        int edadMascota = Integer.parseInt(JTextMascotaEdad.getText());
+        int pesoMascota=Integer.parseInt(JTextMascotaPeso.getText());
+        String fechaNac = JTextMascotaEdad.getText();
         
-        
+         masc = new Mascota(num_chip,nombreMascota,pesoMascota, fechaNac);
+        try {
+            boolean bandera = DB_Driver.emptyDuenio(pers, masc,veto,veta);
+            
+            if(bandera == true){
+                System.out.println("succes");
+            }
+            else{
+                JFrameAddPersona open = new JFrameAddPersona(pers, masc,veto,veta);
+                open.setVisible(true);
+                 open.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            
+        }
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AgregarDuenioMascota.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AgregarDuenioMascota.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }//GEN-LAST:event_JBottonGuardarMascDuenActionPerformed
@@ -373,12 +302,7 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBottonGuardarMascDuen;
-    private javax.swing.JTextField JTextDuenioApell;
     private javax.swing.JTextField JTextDuenioCI;
-    private javax.swing.JTextField JTextDuenioCelular;
-    private javax.swing.JTextField JTextDuenioEmail;
-    private javax.swing.JTextField JTextDuenioFechaNac;
-    private javax.swing.JTextField JTextDuenioNomb;
     private javax.swing.JTextField JTextMascotaEdad;
     private javax.swing.JTextField JTextMascotaNombre;
     private javax.swing.JTextField JTextMascotaPeso;
@@ -389,12 +313,7 @@ public class AgregarDuenioMascota extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables

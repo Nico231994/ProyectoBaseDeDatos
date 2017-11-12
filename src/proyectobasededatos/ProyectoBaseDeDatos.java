@@ -9,13 +9,6 @@ package proyectobasededatos;
  *
  * @author NicoPlaceres
  */
-public class ProyectoBaseDeDatos {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+class ProyectoBaseDeDatos {
     
 }
