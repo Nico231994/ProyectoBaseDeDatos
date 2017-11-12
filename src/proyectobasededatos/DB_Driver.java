@@ -12,9 +12,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -193,7 +196,7 @@ public class DB_Driver {
             ResultSet rs = stmt.executeQuery();
              while(rs.next()){
                     mascota.setNombre(rs.getString("nombre_mascota"));
-                    mascota.setPeso(rs.getString("peso"));
+                    mascota.setPeso(Integer.parseInt(rs.getString("peso")));
                     mascota.setEdad(Integer.parseInt(rs.getString("edad")));
                     
                     persona.setNombre(rs.getString("nombre_duenio"));
@@ -213,7 +216,7 @@ public class DB_Driver {
          stmt = con.prepareStatement("UPDATE DENUNCIA SET ENCONTRADO = TRUE WHERE id_mascota = ? AND  id = (SELECT ID FROM DENUNCIA ORDER BY FECHA DESC LIMIT 1 );");
          stmt.setString(1, id_chip);
          ResultSet rsValidar = stmtValidar.executeQuery();
-         
+          stmt.close();
              while(rsValidar.next()){
                  System.out.println(rsValidar.getString("encontrado"));
                  if(rsValidar.getString("encontrado").compareTo("t") == 0){
@@ -226,11 +229,12 @@ public class DB_Driver {
                 
              
              }
+          
         return false;
     }
     
     //INSERT INTO public.denuncia (id, tipo, fecha, direccion, encontrado, ci_persona, ci_veterinario,id_mascota) VALUES (1, 'Test', '0001-01-01 BC', 'Facultad Catolica del Uruguay', 'false', '16496159', '51315000','16496159');
-    public static void insertarDenuncia(Denuncia denuncia) throws SQLException{
+    public static void insertarDenuncia(Denuncia denuncia) throws SQLException, ParseException{
         String ci = denuncia.getCi_Persona();
         String ciVet= denuncia.getCi_veterinario();
         
@@ -253,13 +257,62 @@ public class DB_Driver {
            int anio = fecha.get(Calendar.YEAR);
             int mes = fecha.get(Calendar.MONTH);
             int dia = fecha.get(Calendar.DAY_OF_MONTH);
-         stmtInsert= con.prepareStatement("INSERT INTO public.denuncia (tipo, fecha, direccion, encontrado, ci_persona, ci_veterinario,id_mascota) "
-                 + "VALUES ('Test', '0001-01-01 BC', 'Facultad Catolica del Uruguay', 'false', '16496159', '51315000','16496159')");
-         
-            stmtInsert.setString(1, "Ingreso por Pantalla");
-            stmtInsert.setDate(4, new java.sql.Date(anio, mes, dia));
-            stmtInsert.setString(2, "");
+            String fechaIn = String.valueOf(dia) +"/"+ String.valueOf(mes) +"/"+ String.valueOf(anio);
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date aDate = format.parse(fechaIn);
             
+            stmtInsert= con.prepareStatement("INSERT INTO public.denuncia (tipo, fecha, direccion, encontrado, ci_persona, ci_veterinario,id_mascota) VALUES (?, ?, ?, ?, ?, ?, ?)");
+         
+            stmtInsert.setString(1, "Ingreso por pantalla");
+            stmtInsert.setDate(2, new java.sql.Date(aDate.getTime()));
+            stmtInsert.setString(3, denuncia.getDireccion());
+            stmtInsert.setBoolean(4, false);
+            stmtInsert.setString(5, denuncia.getCi_Persona());
+            stmtInsert.setString(6, denuncia.getCi_veterinario());
+            stmtInsert.setString(7, denuncia.getId_mascota());
+            stmtInsert.execute();
+            stmtInsert.close();
+    }
+    
+    public static void preDenuncia(Denuncia denuncia,LinkedList<Mascota> mascotas) throws SQLException{
         
+        Connection con = DB_Driver.db_connection();
+         PreparedStatement stmt;
+        //mascotas = new LinkedList(); 
+        
+        stmt = con.prepareStatement("SELECT id_chip,nombre_mascota,peso,edad  FROM mascotas_duenios  where ci_duenio =?");
+            stmt.setString(1,denuncia.getCi_Persona());
+            ResultSet rs = stmt.executeQuery();
+             while(rs.next()){
+                    String id_ChipM = rs.getString("id_chip");
+                    String nombre = rs.getString("nombre_mascota");
+                    int peso = Integer.parseInt(rs.getString("peso"));
+                    int edad = Integer.parseInt(rs.getString("edad"));
+                    mascotas.add(new Mascota(id_ChipM,nombre,peso,edad));
+                }
+    }
+    
+    public static void agregarDatosVet(String ci,String nombre,String apellido,long f_nac,String email,String celular,String rut){
+        Connection con = DB_Driver.db_connection();
+         PreparedStatement stmt;
+         
+         try {
+             stmt = con.prepareStatement("INSERT INTO veterinario(ci,nombre,apellido,f_nac,email,celular) VALUES(?,?,?,?,?,?)");
+             stmt.setString(1,ci);
+             stmt.setString(2,nombre);
+             stmt.setString(3, apellido);
+             stmt.setDate(4, new java.sql.Date(f_nac));
+             stmt.setString(5, email);
+             stmt.setString(6, celular);
+             stmt.execute();
+            
+             stmt = con.prepareStatement("INSERT INTO veterinario_veterinaria(ci,rut) VALUES(?,?)");
+             stmt.setString(1, ci);
+             stmt.setString(2, rut);
+             stmt.execute();
+             stmt.close();
+        } catch (SQLException e) {
+             System.out.println(e.getMessage());
+        }
     }
 }

@@ -13,10 +13,10 @@ public class Mascota implements IMascota{
     private String id_chip;
     private String ci_duenio;
     private String nombre;
-    private String peso;
+    private int peso;
     private int edad;
 
-    public Mascota(String id_chip, String ci_duenio, String nombre, String peso, int edad) {
+    public Mascota(String id_chip, String ci_duenio, String nombre, int peso, int edad) {
         this.id_chip = id_chip;
         this.ci_duenio = ci_duenio;
         this.nombre = nombre;
@@ -26,6 +26,13 @@ public class Mascota implements IMascota{
 
     Mascota(String id_chip) {
        this.id_chip=id_chip;
+    }
+
+    Mascota(String id_ChipM, String nombre, int peso, int edad) {
+        this.id_chip= id_ChipM;
+        this.nombre = nombre;
+        this.peso=peso;
+        this.edad=edad;
     }
 
     public String getId_chip() {
@@ -54,12 +61,12 @@ public class Mascota implements IMascota{
     }
 
     @Override
-    public String getPeso() {
+    public int getPeso() {
         return peso;
     }
 
     @Override
-    public void setPeso(String peso) {
+    public void setPeso(int peso) {
         this.peso = peso;
     }
 

@@ -39,6 +39,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         jTextCIVet = new javax.swing.JTextField();
         jTextRutVet = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jButtonAgregarVeterinario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +61,13 @@ public class JFrameLogin extends javax.swing.JFrame {
 
         jLabel2.setText(" RUT Veterinaria           CI Veterinario");
 
+        jButtonAgregarVeterinario.setText("Agregar Veterinario");
+        jButtonAgregarVeterinario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarVeterinarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,9 +76,6 @@ public class JFrameLogin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jButtonAgregar))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
@@ -78,8 +83,16 @@ public class JFrameLogin extends javax.swing.JFrame {
                                 .addComponent(jTextRutVet, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextCIVet, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)))))
+                                .addGap(8, 8, 8))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(jButtonAgregar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonAgregarVeterinario)
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,9 +105,11 @@ public class JFrameLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextRutVet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextCIVet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonAgregar)
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAgregarVeterinario)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -122,9 +137,7 @@ public class JFrameLogin extends javax.swing.JFrame {
                 
                 Logger.getLogger(JFrameLogin.class.getName()).log(Level.SEVERE, null, ex);
                 
-                JOptionPane.showMessageDialog(null,"Mensaje de Error","Mensaje de Error", JOptionPane.ERROR_MESSAGE); //Tipo de mensaje
-
-               
+                JOptionPane.showMessageDialog(null,"Mensaje de Error","Mensaje de Error", JOptionPane.ERROR_MESSAGE); //Tipo de mensaje   
             }
         
         }
@@ -138,6 +151,14 @@ public class JFrameLogin extends javax.swing.JFrame {
     private void jTextRutVetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextRutVetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextRutVetActionPerformed
+
+    private void jButtonAgregarVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarVeterinarioActionPerformed
+       agregarVeterinario open = new agregarVeterinario();
+       open.setVisible(true);
+       open.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+        
+    }//GEN-LAST:event_jButtonAgregarVeterinarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,6 +200,7 @@ public class JFrameLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonAgregarVeterinario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextCIVet;

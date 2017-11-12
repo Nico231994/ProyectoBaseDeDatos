@@ -17,6 +17,20 @@ public class Denuncia implements IDenuncia {
     private boolean encontrado;
     private String ci_Persona;
     private String ci_veterinario;
+    private String id_mascota;
+
+    Denuncia(String ci, String ci_Vet) {
+        this.ci_Persona = ci;
+        this.ci_veterinario = ci_Vet;
+    }
+
+    public String getId_mascota() {
+        return id_mascota;
+    }
+
+    public void setId_mascota(String id_mascota) {
+        this.id_mascota = id_mascota;
+    }
 
     @Override
     public String getId() {
