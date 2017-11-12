@@ -110,5 +110,15 @@ public class Procedimiento implements IProcedimiento{
         this.descripcion = descripcion;
         this.fecha = fecha;
     }
+    
+    public Procedimiento(String id_mascota, String ci_veterinario, String rut_veterinaria, String tipo, int costo, String descripcion, String fecha) {
+        this.id_mascota = id_mascota;
+        this.ci_veterinario = ci_veterinario;
+        this.rut_veterinaria = rut_veterinaria;
+        this.tipo = tipo;
+        this.costo = costo;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+    }
 
 }

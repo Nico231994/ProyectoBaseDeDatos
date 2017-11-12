@@ -493,5 +493,24 @@ public class DB_Driver {
         con.close();
         return result;
     }
+     
+     static void insertarProcedimiento(Procedimiento prod) throws ParseException, SQLException {
+        Connection con = DB_Driver.db_connection();
+        PreparedStatement stmt;
+
+        SimpleDateFormat format3 = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date aDate3 = format3.parse(prod.getFecha());
+        stmt = con.prepareStatement("INSERT INTO public.procedimiento (id_mascota, ci_veterinario, rut_veterinaria, tipo, costo, descripcion, fecha) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        stmt.setString(1, prod.getId_mascota());
+        stmt.setString(2, prod.getCi_veterinario());
+        stmt.setString(3, prod.getRut_veterinaria());
+        stmt.setString(4, prod.getTipo());
+        stmt.setInt(5, prod.getCosto());
+        stmt.setString(6, prod.getDescripcion());
+        stmt.setDate(7, new java.sql.Date(aDate3.getTime()));
+        stmt.execute();
+        stmt.close();
+        
+    }
         
 }
