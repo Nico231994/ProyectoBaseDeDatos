@@ -27,9 +27,9 @@ interface IMascota {
 
     public void setPeso(int peso);
     
-    public int getEdad();
+    public String getEdad();
     
-    public void setEdad(int edad);
+    public void setEdad(String edad);
     
     
     

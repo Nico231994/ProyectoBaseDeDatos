@@ -197,7 +197,7 @@ public class DB_Driver {
              while(rs.next()){
                     mascota.setNombre(rs.getString("nombre_mascota"));
                     mascota.setPeso(Integer.parseInt(rs.getString("peso")));
-                    mascota.setEdad(Integer.parseInt(rs.getString("edad")));
+                    mascota.setEdad(rs.getString("f_mascota"));
                     
                     persona.setNombre(rs.getString("nombre_duenio"));
                     persona.setCelular(rs.getString("celular"));
@@ -280,14 +280,14 @@ public class DB_Driver {
          PreparedStatement stmt;
         //mascotas = new LinkedList(); 
         
-        stmt = con.prepareStatement("SELECT id_chip,nombre_mascota,peso,edad  FROM mascotas_duenios  where ci_duenio =?");
+        stmt = con.prepareStatement("SELECT id_chip,nombre_mascota,peso,f_mascota  FROM mascotas_duenios  where ci_duenio =?");
             stmt.setString(1,denuncia.getCi_Persona());
             ResultSet rs = stmt.executeQuery();
              while(rs.next()){
                     String id_ChipM = rs.getString("id_chip");
                     String nombre = rs.getString("nombre_mascota");
                     int peso = Integer.parseInt(rs.getString("peso"));
-                    int edad = Integer.parseInt(rs.getString("edad"));
+                    String edad = rs.getString("f_mascota");
                     mascotas.add(new Mascota(id_ChipM,nombre,peso,edad));
                 }
     }
